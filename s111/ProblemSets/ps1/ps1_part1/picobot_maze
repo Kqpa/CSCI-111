@@ -1,0 +1,21 @@
+# north movement
+0 xEW* -> N 0
+
+0 NxW* -> E 1
+
+# east movement
+1 Nx*S -> E 1
+
+1 ***x -> S 2
+
+
+# south movement
+2 *EWx -> S 2
+
+2 **x* -> W 3
+
+
+# west movement
+
+3 N*xS -> W 3
+3 x*** -> N 0
