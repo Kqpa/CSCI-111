@@ -1,0 +1,11 @@
+1980,Carter,41,Reagan,51,Reagan
+1984,Mondale,41,Reagan,59,Reagan
+1988,Dukakis,46,Bush,53,Bush
+1992,Clinton,43,Bush,37,Clinton
+1996,Clinton,49,Dole,41,Clinton
+2000,Gore,48,Bush,48,Bush
+2004,Kerry,48,Bush,51,Bush
+2008,Obama,53,McCain,46,Obama
+2012,Obama,51,Romney,47,Obama
+2016,Clinton,48,Trump,46,Trump
+2020,Biden,51,Trump,47,Biden
