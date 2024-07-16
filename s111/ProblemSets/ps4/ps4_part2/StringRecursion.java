@@ -27,7 +27,7 @@ public class StringRecursion {
         System.out.println("test 2 gives: " + numOccur('e', "Mississippi"));
         printWithSpaces("apple");
         System.out.println();
-        printDecreaString("apple");
+        printDecreasing("apple");
         System.out.println();
         System.out.println(reflect("apple"));
         System.out.println();
@@ -67,6 +67,10 @@ public class StringRecursion {
      * given in the assignment.
      */
     
+     /*
+      * Inserts spaces in between the characters of string `s`
+      * and prints it.
+      */
      public static void printWithSpaces(String s)
      {
          if (s == null || s.equals(""))
@@ -78,16 +82,24 @@ public class StringRecursion {
          printWithSpaces(s.substring(1));
      }
  
-     public static void printDecreaString(String s)
+     /*
+      * Prints the substrings of string `s` in a
+      * "decreasing" order, erasing characters from the end
+      * line by line.
+      */
+     public static void printDecreasing(String s)
      {
          if (s == null || s.equals(""))
          {
              return;
          }
          System.out.println(s);
-         printDecreaString(s.substring(0, s.length() - 1));
+         printDecreasing(s.substring(0, s.length() - 1));
      }
  
+     /*
+      * Prints the original and symetry of the string `s`
+      */
      public static String reflect(String s)
      {
          if (s == null || s.equals(""))
@@ -100,6 +112,10 @@ public class StringRecursion {
                 s.charAt(0);
      }
  
+     /*
+      * Returns the amount of different characters
+      * between Strings `s1` and `s2`
+      */
      public static int numDiff(String s1, String s2)
      {
          if (s1 == null || s2 == null)

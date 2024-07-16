@@ -1,5 +1,5 @@
 /*
- * CensusDatabase.java
+ * CensusDatabaseExtended.java
  * 
  * Computer Science S-111, Harvard University
  *
@@ -14,7 +14,7 @@
 import java.util.*;
 import java.io.*;
 
-public class CensusDatabase
+public class CensusDatabaseExtended
 {
   /*
    * A class-constant array of Strings containing the names of the states
@@ -78,15 +78,13 @@ public class CensusDatabase
 
     while (true)
     {
-      System.out.print("STATE NAME (or q to quit): ");
-      String stateName = console.nextLine();
+      System.out.print("STATE OR DIVISION NAME (or q to quit): ");
+      String stateDivisionNames = console.nextLine();
       
-      if (stateName.equals("q"))
+      if (stateDivisionNames.equals("q"))
       {
         break;
       }
-
-      System.out.println();
 
       /*
        * Add code here to process the state entered by the user.
@@ -100,18 +98,23 @@ public class CensusDatabase
       String[] years = reader.nextLine().split(",");
       int[] yearValues = new int[years.length];
 
-      if (isValidState(stateName))
+      if (isValidState(stateDivisionNames))
       {
-        printDivison(stateName);
-        System.out.println("counties:");
-        processLine(reader, stateName, yearValues);
-        System.out.println("\npopulation totals:");
+        System.out.println();
+        printDivison(stateDivisionNames);
+        processLineState(reader, stateDivisionNames, yearValues);
         printPopulationTotals(years, yearValues);
         System.out.println();
       } 
+      else if (isValidDivision(stateDivisionNames))
+      {
+        processLineDivision(reader, stateDivisionNames, yearValues);
+        printPopulationTotals(years, yearValues);
+        System.out.println();
+      }
       else
       {
-        System.out.println(stateName + " is not a valid state name.\n");
+        System.out.println("\n" + stateDivisionNames + " is not a valid state or division name.\n");
       }
     }
     console.close();
@@ -124,14 +127,14 @@ public class CensusDatabase
    * 
    * You will complete this method so that it searches
    * through the STATE_NAMES array and returns the index
-   * of stateName in that array, or -1 is stateName
+   * of stateDivisionNames in that array, or -1 is stateDivisionNames
    * is not found in that array.
    */
-  public static int getStateCode(String stateName)
+  public static int getStateCode(String stateDivisionNames)
   {
     for (int i = 0; i < STATE_NAMES.length; i++)
     {
-      if (stateName.equals(STATE_NAMES[i]))
+      if (stateDivisionNames.equals(STATE_NAMES[i]))
       {
         return i;
       }
@@ -145,6 +148,7 @@ public class CensusDatabase
    */
   public static void printPopulationTotals(String years[], int yearValues[])
   {
+    System.out.println("\npopulation totals:");
     for (int i = 0; i < yearValues.length; i++)
     {
       System.out.print("  " + years[i] + ": ");
@@ -154,26 +158,27 @@ public class CensusDatabase
   }
 
   /*
-   * Prints the division in which the `stateName` is in.
+   * Prints the division in which the `stateDivisionNames` is in.
    */
-  public static void printDivison(String stateName)
+  public static void printDivison(String stateDivisionNames)
   {
-    System.out.println(stateName + " is in the " +
-                       DIVISION_NAMES[DIVISION_FOR_STATE[getStateCode(stateName)]] +
+    System.out.println(stateDivisionNames + " is in the " +
+                       DIVISION_NAMES[DIVISION_FOR_STATE[getStateCode(stateDivisionNames)]] +
                        " division.\n");
   }
 
   /*
-   * Processes the `fileName`, searching for the lines
-   * with data belonging to the stateName and prints the counties
+   * Processes the `fileName` with the states in mind, searching for the lines
+   * with data belonging to the stateDivisionNames and prints the counties
    * and calculates the total population.
    */
-  public static void processLine(Scanner reader, String stateName, int[] yearValues)
+  public static void processLineState(Scanner reader, String stateDivisionNames, int[] yearValues)
   {
+    System.out.println("counties:");
     while (reader.hasNextLine())
     {
       String[] fields = reader.nextLine().split(",");
-      if (Integer.parseInt(fields[2]) == getStateCode(stateName))
+      if (Integer.parseInt(fields[2]) == getStateCode(stateDivisionNames))
       {
         System.out.println("  " + fields[0]);
         for (int i = 0; i < yearValues.length; i++)
@@ -183,17 +188,53 @@ public class CensusDatabase
       }
     }
   }
+
+  /*
+   * Processes the `fileName` with the division in mind, searching
+   * for lines with data belonging to the stateDivisionNames and 
+   * calculates the total population.
+   */
+  public static void processLineDivision(Scanner reader, String stateDivisonNames, int[] yearValues)
+  {
+    while (reader.hasNextLine())
+    {
+      String[] fields = reader.nextLine().split(",");
+      if (DIVISION_NAMES[DIVISION_FOR_STATE[Integer.parseInt(fields[2])]].equals(stateDivisonNames))
+      {
+        for (int i = 0; i < yearValues.length; i++)
+        {
+          yearValues[i] += Integer.parseInt(fields[3 + i]);
+        }
+      }
+    }
+  }
   
   /*
-   * Checks whether or not a given `stateName`
+   * Checks whether or not a given `stateDivisionNames`
    * is found in `STATE_NAMES`
    */
-  public static boolean isValidState(String stateName)
+  public static boolean isValidState(String stateDivisionNames)
   {
-    if (getStateCode(stateName) == -1)
+    if (getStateCode(stateDivisionNames) == -1)
     {
       return false;
     }
     return true;
+  }
+
+  /*
+   * Checks whether or not a given `stateDivisionNames`
+   * is found in `DIVISION_NAMES`
+   */
+  public static boolean isValidDivision(String stateDivisionName)
+  {
+    for(int i = 0; i < DIVISION_NAMES.length; i++)
+    {
+      if (stateDivisionName.equals(DIVISION_NAMES[i]))
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
