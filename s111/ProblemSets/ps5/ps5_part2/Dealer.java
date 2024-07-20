@@ -29,39 +29,21 @@ public class Dealer extends Player
         {
             super.printHand();
         }
-        System.out.println();
     }
 
     public boolean wantsHit(Player opponent)
     {
-/*         if (!(opponent.getHandValue() > 21))
+         if (!(opponent.getHandValue() > 21))
         {
             if ((opponent.getHandValue() < 17) && (this.getHandValue() <= opponent.getHandValue()))
             {
                 return true;
             }
-            if (this.getHandValue() >= 17 && this.getHandValue() < opponent.getHandValue())
+            if (this.getHandValue() >= 17 && (this.getHandValue() < opponent.getHandValue()))
             {
                 return true;
             }
         }
-        return false; */
-        int opponentHandValue = opponent.getHandValue();
-        int dealerHandValue = this.getHandValue();
-    
-        // If the user’s hand has a value that is less than 17,
-        // the dealer should take hits until the value of her hand exceeds the value of the user’s hand.
-        if (opponentHandValue < 17) {
-            return dealerHandValue <= opponentHandValue;
-        }
-    
-        // If the user’s hand has a value of 17 or more,
-        // the dealer should take hits until the value of her hand matches or exceeds the value of the user’s hand,
-        // unless the user has Blackjack (in which case the dealer should hold, regardless of the value of her own hand).
-        if (opponentHandValue >= 17 && !opponent.hasBlackjack()) {
-            return dealerHandValue < opponentHandValue;
-        }
-    
         return false;
     }
 

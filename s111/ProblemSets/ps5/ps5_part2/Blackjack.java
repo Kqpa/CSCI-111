@@ -113,28 +113,9 @@
       * printResult - prints the result of a round of the game,
       * given the specified players.
       */
-      public static void printResult(Player dealer, Player user) {
-        if (user.getHandValue() > 21)
-        {
-            System.out.println("You lose, " + user.getName() + ".");
-            return;
-        }
-        if (user.hasBlackjack() && !dealer.hasBlackjack())
-        {
-            System.out.println("Blackjack! Congrats, " + user.getName() + "!");
-            return;
-        }
-        if ((dealer.getHandValue() == user.getHandValue()) && (dealer.getHandValue() <= 21) && (user.getHandValue() <= 21))
-        {
-            System.out.println("Push!");
-            return;
-        }
-        if (user.getHandValue() <= 21 && dealer.getHandValue() > 21)
-        {
-            System.out.println("You win, " + user.getName() + "!");
-            return;
-        }
-      }
+     public static void printResult(Player dealer, Player user) {
+         /*** implement this method for Task 4 ***/
+     }
      
      /*
       * displayHands - display the current contents of the specified
@@ -143,7 +124,7 @@
      public static void displayHands(Player dealer, Player user) {
          System.out.print("dealer: ");
          dealer.printHand();
-         System.out.print("   you: ");
+         System.out.print("\n   you: ");
          user.printHand();
          System.out.println();
      }

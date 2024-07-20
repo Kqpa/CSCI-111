@@ -9,7 +9,7 @@ public class Player
     public Player(String name)
     {
         this.name = name;
-        hand = new Card[dep.MAX_CARDS_PER_PLAYER];
+        hand = new Card[Blackjack.MAX_CARDS_PER_PLAYER];
     }
 
     public String getName()
@@ -24,7 +24,7 @@ public class Player
 
     public void addCard(Card c)
     {
-        if (c == null || numCards == dep.MAX_CARDS_PER_PLAYER)
+        if (c == null || numCards == Blackjack.MAX_CARDS_PER_PLAYER)
         {
             throw new IllegalArgumentException();
         }
@@ -67,7 +67,7 @@ public class Player
         {
             System.out.print(hand[i] + "  ");
         }
-        System.out.println("(value = " + this.getHandValue() + ")");
+        System.out.print("(value = " + this.getHandValue() + ")");
     }
 
     public boolean hasBlackjack()
@@ -88,7 +88,7 @@ public class Player
 
     public void discardCards()
     {
-        hand = new Card[dep.MAX_CARDS_PER_PLAYER];
+        hand = new Card[Blackjack.MAX_CARDS_PER_PLAYER];
         numCards = 0;
     }
 }
