@@ -1,0 +1,46 @@
+card c1 (Jack of Spades):
+    getRank: 11
+getRankName: Jack
+ getSuitNum: 3
+getSuitName: Spades
+    getName: Jack of Spades
+      isAce: false
+ isFaceCard: true
+   getValue: 10
+
+card c2 (5 of Diamonds):
+    getRank: 5
+getRankName: 5
+ getSuitNum: 1
+getSuitName: Diamonds
+    getName: 5 of Diamonds
+      isAce: false
+ isFaceCard: false
+   getValue: 5
+
+card c3 (Queen of Hearts):
+    getRank: 12
+getRankName: Queen
+ getSuitNum: 2
+getSuitName: Hearts
+    getName: Queen of Hearts
+      isAce: false
+ isFaceCard: true
+   getValue: 10
+
+card c4 (Ace of Clubs):
+    getRank: 1
+getRankName: Ace
+ getSuitNum: 0
+getSuitName: Clubs
+    getName: Ace of Clubs
+      isAce: true
+ isFaceCard: false
+   getValue: 1
+
+Trying to create a Card with a suit number of 5...
+correctly threw an IllegalArgumentException...
+
+
+Trying to create a Card with a suit name of "Foo"...
+correctly threw an IllegalArgumentException...

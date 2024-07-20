@@ -1,0 +1,17 @@
+c1 = 7S
+c2 = JS
+c3 = AC
+c4 = AD
+c5 = JS
+
+c1.sameSuitAs(c1) = true
+c1.sameSuitAs(c2) = true
+c3.sameSuitAs(c4) = false
+c2.sameSuitAs(c5) = true
+c2.sameSuitAs(null) = false
+
+c1.equals(c1) = true
+c1.equals(c2) = false
+c3.equals(c4) = false
+c2.equals(c5) = true
+c2.equals(null) = false
