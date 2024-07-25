@@ -29,9 +29,10 @@ public class Dealer extends Player
         {
             super.printHand();
         }
+        System.out.println();
     }
 
-    public boolean wantsHit(Player opponent)
+    public boolean wantsHit(Scanner console, Player opponent)
     {
          if (!(opponent.getHandValue() > 21))
         {

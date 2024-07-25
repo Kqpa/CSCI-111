@@ -114,7 +114,22 @@
       * given the specified players.
       */
      public static void printResult(Player dealer, Player user) {
-         /*** implement this method for Task 4 ***/
+        if (user.getHandValue() > 21)
+        {
+            System.out.println("You lose, " + user.getName() + ".");
+        }
+        else if (user.hasBlackjack() && !dealer.hasBlackjack())
+        {
+            System.out.println("Blackjack! Congrats, " + user.getName() + "!");
+        }
+        else if ((dealer.getHandValue() == user.getHandValue()) && (dealer.getHandValue() <= 21) && (user.getHandValue() <= 21))
+        {
+            System.out.println("Push!");
+        }
+        else 
+        {
+            System.out.println("You win, " + user.getName() + "!");
+        }
      }
      
      /*
@@ -124,7 +139,7 @@
      public static void displayHands(Player dealer, Player user) {
          System.out.print("dealer: ");
          dealer.printHand();
-         System.out.print("\n   you: ");
+         System.out.print("   you: ");
          user.printHand();
          System.out.println();
      }

@@ -65,8 +65,8 @@
 
     /***** Implement parts 3-7 below. *****/
 
-    public int rank;
-    public int suitNum;
+    private int rank;
+    private int suitNum;
 
     public Card(int rank, int suitNum)
     {
