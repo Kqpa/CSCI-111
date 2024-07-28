@@ -22,18 +22,44 @@ public class Problem6 {
                 arr[j] = arr[i];
                 j++;
             }
-        }
-        for (int i = arr.length - 1; i > zeroCount; i--)
-        {
             arr[i] = 0;
         }
-        return arr.length - zeroCount;
+       return arr.length - zeroCount;
     }
-
+    public static int[] createSortedArray(int size, int min, int max)
+    {
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++)
+        {
+            arr[i] = (int)(Math.random() * (max - min + 1) + min);
+        }
+        boolean isSorted = false;
+        while (!isSorted)
+        {
+            isSorted = true;
+            for (int i = 0; i < arr.length - 1; i++)
+            {
+                if (arr[i] > arr[i + 1])
+                {
+                    int tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    isSorted = false;
+                }
+            }
+        }
+        return arr;
+    }
+    public static void print(int[] arr)
+    {
+        System.out.println(Arrays.toString(arr));
+    }
     public static void main(String[] args) {
-        int[] a1 = {0, 2, 5, 12, 13, 13, 0, 0, 0, 0, 0, 0};
-        int numUnique = removeDups(a1);
-        System.out.println(Arrays.toString(a1));
+        //int[] arr = createSortedArray(20, -5, 5);
+        int[] arr = {0, 0, 2, 2, 5, 5, 12, 13, 13, 13};
+        print(arr);
+        int numUnique = removeDups(arr);
+        print(arr);
         System.out.println(numUnique);
     }
 }
