@@ -31,7 +31,7 @@ public class Problem6 {
     }
 
     public static void main(String[] args) {
-        int[] a1 = { 0, 0, 2, 2, 5, 5, 10, 12, 12 , 13 ,13 ,13};
+        int[] a1 = {-1, -1, -2, 0, 0, 2, 2, 5, 5, 10, 12, 12 , 13 ,13 ,13};
         int numUnique = removeDups(a1);
         System.out.println(Arrays.toString(a1));
         System.out.println(numUnique);
