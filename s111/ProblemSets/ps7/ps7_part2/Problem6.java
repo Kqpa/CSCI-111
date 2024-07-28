@@ -55,8 +55,7 @@ public class Problem6 {
         System.out.println(Arrays.toString(arr));
     }
     public static void main(String[] args) {
-        //int[] arr = createSortedArray(20, -5, 5);
-        int[] arr = {0, 0, 2, 2, 5, 5, 12, 13, 13, 13};
+        int[] arr = createSortedArray(20, -5, 5);
         print(arr);
         int numUnique = removeDups(arr);
         print(arr);
