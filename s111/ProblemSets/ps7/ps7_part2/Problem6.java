@@ -6,18 +6,18 @@ public class Problem6 {
             throw new IllegalArgumentException("Array cannot be null");
         }
         int zeroCount = 0;
+        int j = 0;
         for (int i = 0; i < arr.length - 1; i++)
         {
-            if (arr[i] == arr[i + 1])
+            if (arr[i] != arr[i + 1])
             {
-                arr[i] = 0;
+                arr[i] = Integer.MIN_VALUE;
                 zeroCount++;
             }
         }
-        int j = 0;
         for (int i = 0; i < arr.length; i++)
         {
-            if (arr[i] != 0)
+            if (arr[i] != Integer.MIN_VALUE)
             {
                 arr[j] = arr[i];
                 j++;
@@ -31,7 +31,7 @@ public class Problem6 {
     }
 
     public static void main(String[] args) {
-        int[] a1 = { 2, 5, 5, 5, 10, 12, 12 };
+        int[] a1 = { 0, 0, 2, 2, 5, 5, 10, 12, 12 , 13 ,13 ,13};
         int numUnique = removeDups(a1);
         System.out.println(Arrays.toString(a1));
         System.out.println(numUnique);
