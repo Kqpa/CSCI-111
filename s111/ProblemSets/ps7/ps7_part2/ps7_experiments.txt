@@ -1,0 +1,33 @@
+Randomly Generated
+________________________________
+For array size of 1000: 
+    499,500 comparisons
+    ~723,441 moves on avarage
+For array size of 2000:
+    1,999,000 comparisons
+    ~3,040,324 moves on avarage
+For array size of 4000:
+    7,998,000 comparisons
+    ~11,504,102 moves on avarage
+
+When n doubles, the comparisons quadruple which indicates a quadratic relationship,
+which can be denoted as O(n^2). Moves also grow quadratically, resulting into an 
+overall time complexity of O(n^2).
+
+
+Almost Sorted
+__________________________
+For array size of 1000:
+    499,500 comparisons
+    ~1,523 moves on avarage
+For array size of 2000:
+    1,999,000 comparisons
+    ~3,102 moves on avarage
+For array size of 4000:
+    7,998,000 comparisons
+    ~5,451 moves on avarage
+
+When n doubles, the comparisons quadruple which indicates a quadratic relationship,
+which can be denoted as O(n^2). Although, for almost sorted arrays the moves grow close
+to a liner relationship, which ultimately is negligable for the resultant time complexity,
+thus having an overall O(n^2) time complexity.

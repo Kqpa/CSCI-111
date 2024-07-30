@@ -1,5 +1,11 @@
 import java.util.Arrays;
 
+/*
+ * Bora Evinç
+ * bevinc26@my.aci.k12.tr
+ * This method finds a "mathemathical" intersection of two arrays, ie.
+ * not including duplicate values. It inserts 0's to the unused parts of the array. 
+ */
 public class Problem7
 {
     public static int[] intersect(int[] a1, int[] a2)
@@ -21,29 +27,28 @@ public class Problem7
         Sort.mergeSort(a2);
 
         int i = 0, j = 0, k = 0;
-        while (i < a1.length)
+        while (i < a1.length && j < a2.length)
         {
-            if (a1[i] == a2[j])
+            if (a1[i] <= a2[j])
             {
-                if (k != 0)
+                if (a1[i] == a2[j])
                 {
-                    if (inter[k - 1] != a1[i])
+                    if (k == 0)
+                    {
+                        inter[k] = a1[i];
+                        k++;
+                    }
+                    else if (inter[k - 1] != a1[i])
                     {
                         inter[k] = a1[i];
                         k++;
                     }
                 }
-                else
-                {
-                    inter[k] = a1[i];
-                    k++;
-                }
-            }
-            j++;
-            if (j == a2.length - 1)
-            {
-                j = 0;
                 i++;
+            }
+            else
+            {
+                j++;
             }
         }
         return inter;

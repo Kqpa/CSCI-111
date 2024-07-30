@@ -1,5 +1,13 @@
 import java.util.Arrays;
 
+/*
+ * Bora Evinç
+ * bevinc26@my.aci.k12.tr
+ * 
+ * This method removes duplicate values in a sorted array
+ * and replaces the duplicate values to 0, leaving them to
+ * the right side of the array and the rest to the left side.
+ */
 public class Problem6 {
     public static int removeDups(int[] arr) {
         if (arr == null) {
@@ -22,43 +30,18 @@ public class Problem6 {
                 arr[j] = arr[i];
                 j++;
             }
+        }
+        for (int i = arr.length - 1; i > zeroCount; i--)
+        {
             arr[i] = 0;
         }
-       return arr.length - zeroCount;
-    }
-    public static int[] createSortedArray(int size, int min, int max)
-    {
-        int[] arr = new int[size];
-        for (int i = 0; i < size; i++)
-        {
-            arr[i] = (int)(Math.random() * (max - min + 1) + min);
-        }
-        boolean isSorted = false;
-        while (!isSorted)
-        {
-            isSorted = true;
-            for (int i = 0; i < arr.length - 1; i++)
-            {
-                if (arr[i] > arr[i + 1])
-                {
-                    int tmp = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = tmp;
-                    isSorted = false;
-                }
-            }
-        }
-        return arr;
-    }
-    public static void print(int[] arr)
-    {
-        System.out.println(Arrays.toString(arr));
+        return arr.length - zeroCount;
     }
     public static void main(String[] args) {
-        int[] arr = createSortedArray(20, -5, 5);
-        print(arr);
+        int[] arr = {2, 5, 5, 5, 10, 12, 12};
+        System.out.println(Arrays.toString(arr));
         int numUnique = removeDups(arr);
-        print(arr);
+        System.out.println(Arrays.toString(arr));
         System.out.println(numUnique);
     }
 }

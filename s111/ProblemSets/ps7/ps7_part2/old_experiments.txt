@@ -1,0 +1,25 @@
+Swap Sort Big O Analysis
+__________________________
+Randomly Sorted:
+    Length 10:      45 comparisons	         63 moves
+    Length 100:     4950 comparisons	     8244 moves
+    Length 200:     19900 comparisons	     31752 moves
+    Length 500:     124750 comparisons	     179367 moves
+    Length 1000:    499500 comparisons	     730731 moves
+    Length 2000:    1999000 comparisons	     2959170 moves
+    Length 4000:    7998000 comparisons	     11793945 moves
+    Length 8000:    31996000 comparisons	 46522287 moves
+    Length 16000:   127992000 comparisons	 178678047 moves
+    Length 32000:   511984000 comparisons	 655516380 moves
+
+Almost Sorted:
+    Length 10:      45 comparisons	         3 moves
+    Length 100:     4950 comparisons	     150 moves
+    Length 200:     19900 comparisons	     327 moves
+    Length 500:     124750 comparisons       663 moves
+    Length 1000:    499500 comparisons	     1455 moves
+    Length 2000:    1999000 comparisons	     2901 moves
+    Length 4000:    7998000 comparisons	     5868 moves
+    Length 8000:    31996000 comparisons	 11244 moves
+    Length 16000:   127992000 comparisons	 21795 moves
+    Length 32000:   511984000 comparisons	 40335 moves

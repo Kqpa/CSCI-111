@@ -3,8 +3,8 @@
  *
  * Computer Science S-111, Harvard University
  *
- * Modified by:   Bora Evinç, bevinc26@my.aci.k12.tr
- * Date modified: 29 July 2024
+ * Modified by:   <your name>, <your e-mail address>
+ * Date modified: <current date>
  */
 
 import java.util.*;
@@ -17,7 +17,7 @@ import java.util.*;
  * elements of the array should be sorted.  The algorithms sort the array
  * in place, altering the original array.
  */
-public class SortCount {
+public class oldSortCount {
     /* 
      * the integers in the test arrays are drawn from the range 
      * 0, ..., MAX_VAL 
@@ -27,14 +27,9 @@ public class SortCount {
     private static long compares;     // total number of comparisons
     private static long moves;        // total number of moves
     
-    /*
-     * This method uses nested for loops to traverse through 
-     * the array to compare every index to the rest of the array,
-     * and swaps it so that it can have a decreasing order.
-     */
     public static void swapSort(int[] arr)
     {
-        for (int i = 0; i < arr.length - 1; i++)
+        for (int i = 0; i < arr.length; i++)
         {
             for (int j = i + 1; j < arr.length; j++)
             {
@@ -381,46 +376,54 @@ public class SortCount {
     public static void main(String args[]) {
         int[] a;       // the array
         int[] asave;   // a copy of the original unsorted array
-        int numItems;
+        int[] numItems;
         String arrayType;
         
         /*
          * Get various parameters from the user.
          */
         Scanner in = new Scanner(System.in);
-        System.out.print("How many items in the array? ");
-        numItems = in.nextInt();
-        in.nextLine();
-        System.out.print("Random (r), almost sorted (a), or fully sorted (f)? ");
-        arrayType = in.nextLine();
-        System.out.println();
+        System.out.print("How many test to conduct? ");
+        numItems = new int[in.nextInt()];
+        int index = 0;
+        while (index < numItems.length)
+        {
+            System.out.print(
+                "What is the array size? (" + (index + 1) + " out of " + numItems.length + "): " );
+            numItems[index] = in.nextInt();
+            index++;
+        }
         in.close();
         
         /* 
          * Create the arrays. 
          */
-        if (arrayType.equalsIgnoreCase("A")) {
-            a = almostSortedArray(numItems);
-        } else {
-            a = randomArray(numItems);
-            if (arrayType.equalsIgnoreCase("F")) {
-                quickSort(a);
-            }
-        }
-        asave = new int[numItems];
-        System.arraycopy(a, 0, asave, 0, a.length);
-        printArray(a);
-        
-        /*
-         * Try each of the various algorithms, starting each time 
-         * with a fresh copy of the initial array.
-         */
+        for (int i = 0; i < numItems.length; i++)
+        {
+            System.out.println();
+            a = randomArray(numItems[i]);
+            asave = new int[numItems[i]];
+            System.arraycopy(a, 0, asave, 0, a.length);
+            printArray(a);
+            System.out.println("swapSort\t\t");
+            System.out.print("random array:        \t\t");
+            System.arraycopy(asave, 0, a, 0, asave.length);
+            initStats();
+            swapSort(a);
+            printStats();
+            printArray(a);
 
-        System.out.print("swapSort\t\t");
-        System.arraycopy(asave, 0, a, 0, asave.length);
-        initStats();
-        swapSort(a);
-        printStats();
-        printArray(a);
+            a = almostSortedArray(numItems[i]);
+            asave = new int[numItems[i]];
+            System.arraycopy(a, 0, asave, 0, a.length);
+            printArray(a);
+            System.out.print("almost sorted array: \t\t");
+            System.arraycopy(asave, 0, a, 0, asave.length);
+            initStats();
+            swapSort(a);
+            printStats();
+            printArray(a);
+
+        }
     }
 }
