@@ -18,6 +18,22 @@ public class DNode {
     private DNode next;
 
     /*
+     * extra stuff
+     */
+    public static DNode intNexts(DNode last)
+    {
+        while (last.prev != null)
+        {
+            last.prev.next = last;
+            last = last.prev;
+        }
+        return last;
+    }
+    /*
+     * extra stuff
+     */
+
+    /*
      * Constructor
      */
     public DNode(char c, DNode p, DNode n) {
@@ -76,9 +92,12 @@ public class DNode {
 
     // Problem 2
     public static DNode initNexts(DNode last) {
-        // Replace the return statement below with your 
-        // implementation of the method.
-        return null;
+        while (last.prev != null)
+        {
+            last.prev.next = last;
+            last = last.prev;
+        }
+        return last;
     }    
 
     /*

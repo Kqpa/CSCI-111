@@ -14,6 +14,17 @@ import java.util.*;
 public class LLList implements List {
     // Inner class for a node.  We use an inner class so that the LLList
     // methods can access the instance variables of the nodes.
+    
+    public static LLList scale(int factor, ArrayList vals) {
+        LLList scaled = new LLList();
+        for (int i = vals.length() - 1; i >= 0; i++)
+        {
+            int val = (Integer)vals.getItem(i);
+            scaled.addItem(val*factor, 0);
+        }
+        return scaled;
+    }
+
     private class Node {
         private Object item;
         private Node next;
@@ -22,32 +33,12 @@ public class LLList implements List {
             item = i;
             next = n;
         }
-        public String toString()
-        {
-            return this.item + "";
-        }
     }
     
     // fields of the LLList object
     private Node head;     // dummy head node
     private int length;    // # of items in the list
     
-    /*
-     * TODO: to be implemented
-     */
-    public void rotate(int k)
-    {
-        if (k < 0 || k > length)
-        {
-            throw new IllegalArgumentException();
-        }
-        if (k == 0 || k == length)
-        {
-            return;
-        }
-        Node newHead;
-        Node trav;
-    }
     /*
      * Constructs a LLList object for a list that is initially empty.
      */

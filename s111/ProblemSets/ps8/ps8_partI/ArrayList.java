@@ -7,9 +7,6 @@
 /*
  * A class that implements our simple List interface using an array.
  */
-
-import java.util.Arrays;
-
 public class ArrayList implements List {
     private Object[] items;     // the items in the list
     private int length;         // # of items in the list
@@ -26,29 +23,6 @@ public class ArrayList implements List {
         length = 0;
     }
     
-    public void rotate(int k)
-    {
-        if (k < 0 || k > items.length)
-        {
-            throw new IllegalArgumentException();
-        }
-        if (k == 0 || k == items.length)
-        {
-            return;
-        }
-        Object[] temp = new Object[this.length];
-        for (int i = 0; i < this.length; i++)
-        {
-            temp[i] = items[i];
-        }
-        for (int i = 0; i < this.length; i++)
-        {
-            int newIndex = (i + k) % this.length;
-            temp[newIndex] = items[i];
-        }
-        items = temp;
-    }
-
     /*
      * Constructs an ArrayList object containing the items in the specified
      * array, and with a max size that is twice the size of that array 

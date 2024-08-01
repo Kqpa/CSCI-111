@@ -15,12 +15,6 @@ public interface List {
     /* returns the item at position i in the list */
     Object getItem(int i);
 
-    /*
-     * Shifts the elements inside the list
-     * k index forward, goes to start if needed.
-     */
-    void rotate(int k);
-
     /* 
      * adds the specified item at position i in the list, shifting the
      * items that are currently in positions i, i+1, i+2, etc. to the

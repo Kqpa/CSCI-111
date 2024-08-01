@@ -100,20 +100,18 @@ public class StringNode {
      * copy - returns a copy of the given linked-list string
      */
     public static StringNode copy(StringNode str) {
-        if (str == null)
-        {
+        if (str == null) {
             return null;
         }
-        StringNode s = new StringNode(str.ch, null);
-        StringNode traverse = s;
-        str = str.next;
-        while (str != null)
-        {
-            traverse.next = new StringNode(str.ch, null);
-            traverse = traverse.next;
-            str = str.next;
-        }
-        return s;
+        
+        // Create the first node of the copy, copying the
+        // first character into it.
+        StringNode copyFirst = new StringNode(str.ch, null);
+        
+        // Make a recursive call to get a copy of the rest, 
+        // and store the result in the first node's next field.
+        copyFirst.next = copy(str.next);
+        return copyFirst;
     }
     
     /**
@@ -147,14 +145,16 @@ public class StringNode {
     public static int indexOf(StringNode str, char ch) {
         if (str == null) {          // base case 1: ch wasn't found
             return -1;
+        } else if (str.ch == ch) {  // base case 2: ch was just found
+            return 0;           
+        } else {
+            int indexInRest = indexOf(str.next, ch);
+            if (indexInRest == -1) {
+                return -1;
+            } else { 
+                return 1 + indexInRest;
+            }
         }
-        int indexCount = 0;
-        while (str != null && str.ch != ch)
-        {
-            indexCount++;
-            str = str.next;
-        }
-        return indexCount;
     }
     
     /** 
@@ -169,16 +169,34 @@ public class StringNode {
     public static StringNode insertAfter(StringNode str, char newChar, 
                                          char afterChar) 
     {
-        if (str == null)
-        {
-            return new StringNode(newChar, null);
+        StringNode newNode = new StringNode(newChar, null);
+        
+        // If the string is empty, return the new node,
+        // which is the new first node.
+        if (str == null) {
+            return newNode;
         }
-        else if (str.ch == afterChar)
-        {
-            str.next = new StringNode(newChar, str.next);
-            return str;
+        
+        StringNode trail = null;
+        StringNode trav = str;
+        while (trav != null) {
+            if (trav.ch == afterChar) {
+                // Perform the insertion.
+                newNode.next = trav.next;
+                trav.next = newNode;
+                
+                // We're done. Return the first node as required.
+                return str;
+            }
+            
+            trail = trav;
+            trav = trav.next;
         }
-        str.next = insertAfter(str.next, newChar, afterChar);
+        
+        // If we get here, we didn't find afterChar,
+        // so we insert the new node at the end of the list
+        // by using trail, which is pointing to the current last node.
+        trail.next = newNode;
         return str;
     }
     
@@ -244,12 +262,16 @@ public class StringNode {
      * starts with prefix and false otherwise.
      */
     public static boolean isPrefix(StringNode prefix, StringNode str) {
-       while ((str != null && prefix != null) && prefix.ch == str.ch)
-       {
-            prefix = prefix.next;
-            str = str.next;
-       }
-       return prefix == null;
+        // Three base cases.
+        if (prefix == null) {
+            return true;          // processed all of prefix without a mismatch
+        } else if (str == null) {
+            return false;         // str is shorter than prefix
+        } else if (str.ch != prefix.ch) {
+            return false;         // a mismatch
+        } else {
+            return isPrefix(prefix.next, str.next);
+        }
     }
     
     /**
@@ -317,53 +339,19 @@ public class StringNode {
      * if the old first node contained a space.
      */
     public static StringNode removeAllSpaces(StringNode str) {
-        /*
-         * Determine head node
-         */
-        while (str.ch == ' ')
-        {
-            str = str.next;
-        }
-        StringNode head = str;
-        StringNode trav = head;
-        while (trav.next != null)
-        {
-            if (trav.next.ch == ' ')
-            {
-                /*
-                 * Find the node that does not point
-                 * to a node with a space character
-                 */
-                StringNode trav2 = trav;
-                do
-                {
-                    trav2 = trav2.next;
-                } while (trav2.ch == ' ');
-                trav.next = trav2;
+        if (str == null) {
+            return null;
+        } else {
+            StringNode removedFromRest = removeAllSpaces(str.next);
+            if (str.ch == ' ') {
+                return removedFromRest;
+            } else {
+                str.next = removedFromRest;
+                return str;
             }
-            trav = trav.next;
         }
-        return head;
     }
     
-    public static StringNode replace(StringNode str, char oldChar, char newChar)
-    {
-        if (str == null)
-        {
-            return null;
-        }
-        StringNode next = replace(str.next, oldChar, newChar);
-        if (str.ch == oldChar)
-        {
-            str = new StringNode(newChar, next);
-        }
-        else
-        {
-            str = new StringNode(str.ch, next);
-        }
-        return str;
-    }
-
     /*
      * toString - creates and returns the Java string that
      * the current StringNode represents.  Note that this
@@ -390,21 +378,15 @@ public class StringNode {
      * rather than creating a new list.
      */
     public static void toUpperCase(StringNode str) {        
-        if (str == null)
-        {
-            return;
+        StringNode trav = str; 
+        while (trav != null) {
+            trav.ch = Character.toUpperCase(trav.ch); 
+            trav = trav.next;
         }
-        str.ch = Character.toUpperCase(str.ch);
-        toUpperCase(str.next);
     } 
     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        
-        StringNode s1 = StringNode.convert("banana");
-        StringNode s2 = StringNode.replace(s1, 'a', 'o');
-        System.out.println(s2);
-        System.out.println(s1);   // original should be unchanged
         
         // toUpperCase
         StringNode str = StringNode.convert("fine");

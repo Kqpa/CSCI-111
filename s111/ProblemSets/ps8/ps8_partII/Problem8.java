@@ -1,12 +1,77 @@
 /*
  * Problem8.java
  */
-   
+
 public class Problem8 {
     public static boolean isPal(String s) {
-        // This following line is included so that the method will compile. 
-        // Replace it with your implementation of the method.
-        return false;
+        if (s == null)
+        {
+            throw new IllegalArgumentException();
+        }
+        else if (s.length() <= 1)
+        {
+            return true;
+        }
+        String parsedS = "";
+        /*
+         * Add characters to parsedS if they are alphabetic lowercase letters
+         */
+        for (int i = 0; i < s.length(); i++)
+        {
+            char ch = Character.toLowerCase(s.charAt(i));
+            if (ch >= 97 && ch <= 122)
+            {
+                parsedS += ch;
+            }
+        }
+        String leftSide;
+        String rightSide;
+        /*
+         * abba; l = 4
+         * 0, l/2 -> ab
+         * 2 -> ba
+         * 
+         * racecar; l = 7
+         * 0, l/2 -> 0, 3 -> rac
+         * l/2 + 1 -> 4 -> car
+         */
+        int len = parsedS.length();
+        if (len % 2 == 0)
+        {
+            leftSide = parsedS.substring(0, len / 2);
+            rightSide = parsedS.substring(len / 2);
+        }
+        else
+        {
+            leftSide = parsedS.substring(0, len / 2);
+            rightSide = parsedS.substring(len / 2 + 1);
+        }
+        /*
+         * leftString = rac
+         * rightString = car
+         * left (queue) -> car
+         * right (stack) -> car
+         */
+        LLQueue<Character> left = new LLQueue<Character>();
+        LLStack<Character> right = new LLStack<Character>();
+        for (int i = 0; i < leftSide.length(); i++)
+        {
+            left.insert(leftSide.charAt(i));
+        }
+        for (int i = 0; i < rightSide.length(); i++)
+        {
+            right.push(rightSide.charAt(i));
+        }
+        while (!left.isEmpty() && !right.isEmpty())
+        {
+            char leftRemove = left.remove();
+            char rightPop = right.pop();
+            if (leftRemove != rightPop)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     
     public static void main(String[] args) {
