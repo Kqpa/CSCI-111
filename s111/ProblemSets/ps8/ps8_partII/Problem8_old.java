@@ -1,12 +1,8 @@
 /*
  * Problem8.java
- * Bora Evinç
- * bevinc26@my.aci.k12.tr
- * Checks if given string s is a palindrome, meaning read the same 
- * left to right and right to left
  */
 
-public class Problem8 {
+public class Problem8_old {
     public static boolean isPal(String s) {
         if (s == null)
         {
@@ -16,24 +12,61 @@ public class Problem8 {
         {
             return true;
         }
-        LLQueue<Character> queue = new LLQueue<Character>();
-        LLStack<Character> stack = new LLStack<Character>();
+        String parsedS = "";
+        /*
+         * Add characters to parsedS if they are alphabetic lowercase letters
+         */
         for (int i = 0; i < s.length(); i++)
         {
             char ch = Character.toLowerCase(s.charAt(i));
             if (ch >= 97 && ch <= 122)
             {
-                queue.insert(ch);
-                stack.push(ch);
+                parsedS += ch;
             }
         }
-        System.out.println(queue);
-        System.out.println(stack);
-        while (!stack.isEmpty() && !queue.isEmpty())
+        String leftSide;
+        String rightSide;
+        /*
+         * abba; l = 4
+         * 0, l/2 -> ab
+         * 2 -> ba
+         * 
+         * racecar; l = 7
+         * 0, l/2 -> 0, 3 -> rac
+         * l/2 + 1 -> 4 -> car
+         */
+        int len = parsedS.length();
+        if (len % 2 == 0)
         {
-            char queueChar = queue.remove();
-            char stackChar = stack.pop();
-            if (queueChar != stackChar)
+            leftSide = parsedS.substring(0, len / 2);
+            rightSide = parsedS.substring(len / 2);
+        }
+        else
+        {
+            leftSide = parsedS.substring(0, len / 2);
+            rightSide = parsedS.substring(len / 2 + 1);
+        }
+        /*
+         * leftString = rac
+         * rightString = car
+         * left (queue) -> car
+         * right (stack) -> car
+         */
+        LLQueue<Character> left = new LLQueue<Character>();
+        LLStack<Character> right = new LLStack<Character>();
+        for (int i = 0; i < leftSide.length(); i++)
+        {
+            left.insert(leftSide.charAt(i));
+        }
+        for (int i = 0; i < rightSide.length(); i++)
+        {
+            right.push(rightSide.charAt(i));
+        }
+        while (!left.isEmpty() && !right.isEmpty())
+        {
+            char leftRemove = left.remove();
+            char rightPop = right.pop();
+            if (leftRemove != rightPop)
             {
                 return false;
             }

@@ -4,8 +4,8 @@
  * Computer Science S-111
  * 
  * modified by:
- *   name: 
- *   email:
+ *   name: Bora Evinç
+ *   email: bevinc26@my.aci.k12.tr
  */
 
 import java.io.*;

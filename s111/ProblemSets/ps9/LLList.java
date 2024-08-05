@@ -1,9 +1,7 @@
 /*
  * LLList.java
  *
- * Computer Science S-111, Harvard University
- * 
- * Modified by: Bora Evinç, bevinc26@my.aci.k12.tr
+ * Computer Science S-111
  */
 
 import java.util.*;
@@ -24,53 +22,13 @@ public class LLList implements List {
             item = i;
             next = n;
         }
-        public String toString()
-        {
-            return this.item + "";
-        }
     }
     
     // fields of the LLList object
     private Node head;     // dummy head node
     private int length;    // # of items in the list
     
-    public void rotate(int k)
-    {
-        if (k < 0 || k > length)
-        {
-            throw new IllegalArgumentException();
-        }
-        if (k == 0 || k == length)
-        {
-            return;
-        }
-
-        int startIndex = this.length - k;
-        int endIndex = startIndex - 1;
-
-        Node startNode = this.getNode(startIndex);
-        Node newHead = new Node(startNode.item, null);
-        Node trav = newHead;
-
-        for (int i = startIndex + 1; i < length; i++)
-        {
-            startNode = startNode.next;
-            trav.next = new Node(startNode.item, null);
-            trav = trav.next;
-        }
-
-        startNode = this.getNode(0);
-        trav.next = new Node(startNode.item, null);
-        trav = trav.next;
-
-        for (int i = 1; i <= endIndex; i++)
-        {
-            startNode = startNode.next;
-            trav.next = new Node(startNode.item, null);
-            trav = trav.next;
-        }
-        head.next = newHead;
-    }    /*
+    /*
      * Constructs a LLList object for a list that is initially empty.
      */
     public LLList() {
@@ -151,8 +109,8 @@ public class LLList implements List {
      * head node, and the rest of insertion can proceed as usual.
      */
     public boolean addItem(Object item, int i) {
-        if (item == null || i < 0 || i > length) {
-            throw new IllegalArgumentException();
+        if (i < 0 || i > length) {
+            throw new IndexOutOfBoundsException();
         }
         
         Node newNode = new Node(item, null);

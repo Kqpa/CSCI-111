@@ -2,6 +2,8 @@
  * ArrayList.java
  *
  * Computer Science S-111, Harvard University
+ * 
+ * Modified by: Bora Evinç, bevinc26@my.aci.k12.tr
  */
 
 /*

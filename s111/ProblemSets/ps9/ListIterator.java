@@ -1,7 +1,7 @@
 /*
  * ListIterator.java
  *
- * Computer Science S-111, Harvard University
+ * Computer Science S-111
  */
 
 /*
